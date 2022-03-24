@@ -1,4 +1,5 @@
 import math 
+import matplotlib.pyplot as plt
 class Particle():
     def __init__(self,x0,y0,v0,theta):
         self.x = []
@@ -36,7 +37,7 @@ class Particle():
         self.v_x.append(self.v_x)
         self.v_y.append(self.v_y[-1]-self.a_y[-1]*self.dt)
         self.x.append(self.x[-1]+self.v_x[-1]*self.dt)
-        self.y.append(self.y[-1]+self.v_y[-1]*self*dt)
+        self.y.append(self.y[-1]+self.v_y[-1]*self.dt)
         
     
     def range(self):
@@ -44,16 +45,6 @@ class Particle():
             self.__move()
         return self.x[-1]
 
-    def PrintInfo(self):
-        print("v_y je {}".format (self.v_y))
-        print("a_x je {}".format(self.a_x))
-        print("v_x je {}".format(self.v_x))
-
-
-
-p1 = Particle(0,0,15,40)
-p1.set_initial_conditions(0,0,15,40)
-p1.PrintInfo()
-p1.reset()
-p1.PrintInfo()
-p1.PrintInfo()
+    def plot_trajectory():
+        plt.plot(self.x,self.y)
+        plt.show()
