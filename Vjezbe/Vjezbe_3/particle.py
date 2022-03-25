@@ -41,7 +41,7 @@ class Particle():
         
     
     def range(self):
-        while self.y[-1] > 0:
+        while self.y[-1] >= 0:
             self.__move()
         return self.x[-1]
 
