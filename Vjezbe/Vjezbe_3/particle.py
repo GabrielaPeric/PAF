@@ -9,6 +9,7 @@ class Particle():
         self.t = []
         self.a_x = []
         self.a_y = []
+        self.theta = theta
         self.dt = 0.1
     
     def set_initial_conditions(self, x0,y0,v0,theta):
@@ -48,8 +49,13 @@ class Particle():
     def plot_trajectory(self):
         plt.plot(self.x,self.y)
         plt.show()
+    
+    def analiticki(self):
+        self.v_y_broj = self.v_y[0]
+        self.v_x_broj = self.v_x[0]
+        domet = ((self.v_y_broj**2+self.v_x_broj**2)*math.sin(2*self.theta))/-9.81
+        return domet
 
-p1 = Particle(0,0,15,40)
-p1.set_initial_conditions(0,0,15,40)
-p1.range()
-p1.plot_trajectory()
+    def relativna_pogreska(self):
+        pogreska = (abs(self.analiticki() - self.range())/self.analiticki())*100
+        return pogreska
