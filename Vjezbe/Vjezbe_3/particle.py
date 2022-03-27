@@ -32,9 +32,9 @@ class Particle():
     
     def __move(self):
         self.t.append(self.t[-1]+self.dt)
-        self.a_x.append(self.a_x)
-        self.a_y.append(self.a_y)
-        self.v_x.append(self.v_x)
+        self.a_x.append(self.a_x[-1])
+        self.a_y.append(self.a_y[-1])
+        self.v_x.append(self.v_x[-1])
         self.v_y.append(self.v_y[-1]-self.a_y[-1]*self.dt)
         self.x.append(self.x[-1]+self.v_x[-1]*self.dt)
         self.y.append(self.y[-1]+self.v_y[-1]*self.dt)
@@ -45,6 +45,11 @@ class Particle():
             self.__move()
         return self.x[-1]
 
-    def plot_trajectory():
+    def plot_trajectory(self):
         plt.plot(self.x,self.y)
         plt.show()
+
+p1 = Particle(0,0,15,40)
+p1.set_initial_conditions(0,0,15,40)
+p1.range()
+p1.plot_trajectory()
