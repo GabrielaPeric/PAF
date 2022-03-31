@@ -1,12 +1,12 @@
-def derivacija(func,x):
-    dx = 0.1
-    derivacija = (func(x+dx)-func(x)//dx)
-    return derivacija
+def derivacija_two_point(func, x):
+    h = 0.1 #Ovo je korak
+    return (func(x+h)-func(x))/h
 
-def f1(x):
-    return x*x
+def derivacija_three_point(func, x):
+    h = 0.1
+    return (func(x+h)-func(x-h))/(2*h)    
 
-def f1(x):
-    return 6*x**4 + 5*x + 3
-
-def derivacija(f1,1)
+def derivacija_s_rasponom(func,x,a,b): #func je funckija, x je tocka u funkciji, a i be su međe
+    x_lista = [x]
+    while x_lista[-1] <= b:
+        
