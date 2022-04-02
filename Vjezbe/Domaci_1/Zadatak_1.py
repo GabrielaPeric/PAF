@@ -61,3 +61,27 @@ class Particle():
     def relativna_pogreska(self):
         pogreska = (abs(self.analiticki() - self.range())/self.analiticki())*100
         return pogreska
+
+    def total_time(self):
+        while self.y[-1] >= 0:
+            self.__move()
+        print(self.t[-1])
+
+    def max_speed(self):
+        while self.y[-1] >= 0:
+            self.__move()
+        x_najbrza = (max(self.v_x))
+        y_najbrza = (max(self.v_y))
+        v_najbrza = math.sqrt(x_najbrza**2+y_najbrza**2)
+        print(v_najbrza)
+
+    def domet_brzina_graf(self):
+        plt.plot()
+
+    
+
+
+p2 = Particle(0,0,10,60)
+p2.set_initial_conditions(0,0,10,60)
+p2.total_time()
+p2.max_speed()
