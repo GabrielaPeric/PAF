@@ -33,7 +33,7 @@ def derivacija(func,a,b,metoda):
     return plt.scatter(x_lista,y_lista), x_lista, y_lista
 
 
-#def integral_pravokutnik(func,a,b,n):
+def integral_pravokutnik(func,a,b,n):
     dx = (b-a)/n 
     gornja_meda = 0
     donja_meda = 0
@@ -46,9 +46,19 @@ def derivacija(func,a,b,metoda):
         d += dx
     return gornja_meda, donja_meda
 
-#def integral_trapez(func,a,b,n):
+def integral_trapez(func,a,b,n):
     dx = (b-a)/n
     zbroj = 0
+    integral = 0
+    x = a
+    for i in range(n):
+        zbroj += (func(x)+func(x+dx))
+        x += dx
+        integral = (dx/2)*zbroj
+
+    return integral
+
+
     
 
     
