@@ -35,8 +35,30 @@ class Gibanje:
             self.x.append(self.x[-1]+self.v[-1]*self.dt)
             self.F = self.func(self.v[-1],self.x[-1],self.t[-1])
             self.a.append(self.F/self.m[-1])
+
+    def plot_trajectory(self):
+        plt.subplot(1,3,1)
+        plt.plot(self.t,self.x)
+        plt.title("x-t graf")
+
+        plt.subplot(1,3,2)
+        plt.plot(self.t,self.v)
+        plt.title("v-t graf")
+
+        plt.subplot(1,3,3)
+        plt.plot(self.t,self.a)
+        plt.title("a-t graf")
+
+        plt.subplots_adjust(left=0.1,
+                    bottom=0.1, 
+                    right=0.9, 
+                    top=0.9, 
+                    wspace=0.4, 
+                    hspace=0.4)
+
+        plt.show()
             
             
     def print(self):
         self.__move()
-        print(self.t, self.x, self.v)
+        print(self.t, self.x, self.v, self.a)
