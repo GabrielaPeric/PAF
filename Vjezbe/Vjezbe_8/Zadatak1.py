@@ -44,12 +44,39 @@ class Projectile():
         self.m = []
         self.A = []
 
-    def akcelerazion_x(self):
-        return -np.sign((self.rho[-1]*self.Cd[-1]*self.A[-1])/2*self.m[-1])**self.v_x[-1]
+    def akceleracija_x(self,x,v,t):
+        return -np.sign(self.v_x[-1])*((self.rho[-1]*self.Cd[-1]*self.A[-1])/2*self.m[-1])*v**2
 
-    def akcelerazion_y(self):
-        return -self.a_y[-1]-np.sign((self.rho[-1]*self.Cd[-1]*self.A[-1])/2*self.m[-1])**self.v_y[-1]
+    def akceleracija_y(self,x,v,t):
+        return -9.81-np.sign(self.v_x)*((self.rho[-1]*self.Cd[-1]*self.A[-1])/2*self.m[-1])*v**2
 
-    
+
+    def __Euler(self):
+        self.t.append(self.t[-1]+self.dt)
+        self.a_x.append(self.akceleracija_x(self.x[-1],self.v_x[-1],self.t[-1]))
+        self.a_y.append(self.akceleracija_y(self.x[-1],self.v_x[-1],self.t[-1]))
+        self.v_x.append(self.v_x[-1])
+        self.v_y.append(self.v_y[-1]-self.a_y[-1]*self.dt)
+        self.x.append(self.x[-1]+self.v_x[-1]*self.dt)
+        self.y.append(self.y[-1]+self.v_y[-1]*self.dt)
+
+    def __runge_kutta(self):
+        k1_v_x = self.akceleracija_x(self.x[-1],self.v_x[-1],self.t[-1])*self.dt
+        k1_v_y = self.akceleracija_y(self.y[-1],self.v_y[-1],self.t[-1])*self.dt
+        k1_x = self.v_x[-1]*self.dt
+        k1_y = self.v_y[-1]*self.dt
+        
+        k2_v_x = self.akceleracija_x(self.x[-1]+k1_x/2,self.v_x[-1]+k1_v_x/2,self.t[-1]+self.dt/2)*self.dt
+        k2_v_y = self.akceleracija_y(self.y[-1]+k1_y/2, self.v_y[-1]+k1_v_y/2,self.t[-1]+self.dt/2)*self.dt
+        k2_x = (self.v_x[-1] + k1_v_x/2)*self.dt
+        k2_y = (self.v_y[-1] + k1_v_y/2)*self.dt
+
+        k3_v_x = self.akceleracija_x(self.x[-1]+k2_x/2,self.v_x[-1]+k2_v_x/2,self.t[-1]+self.dt/2)*self.dt
+        k3_v_y = self.akceleracija_y(self.y[-1]+k2_y/2,self.v_y[-1]+k2_v_y/2,self.t[-1]+self.dt/2)*self.dt
+        k3_x = self.akceleracija_x(self.v_x[-1]+k2_v_x/2)*self.dt
+        k3_y = self.akceleracija_y(self.v_y[-1]+k2_v_y/2)*self.dt
+
+        k4_v_x = self.akceleracija_x(self.x[-1]+k3_x, )
+
 
     
