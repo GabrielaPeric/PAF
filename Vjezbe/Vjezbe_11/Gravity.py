@@ -36,8 +36,10 @@ class Gravity():
 
 
     def __move(self):
-        self.a_sun = (-self.gravitacijska_konstanta*(self.mass_earth/(np.abs(np.subtract(self.r_sun, self.r_earth)))**3))*(np.sign(np.subtract(self.r_sun, self.r_earth)))
-        self.a_earth = (-self.gravitacijska_konstanta*(self.mass_sun/(np.abs(np.subtract(self.r_earth, self.r_sun)))**3))*(np.sign(np.subtract(self.r_earth, self.r_sun)))
+        self.d1 = math.sqrt((self.r_sun[0]-self.r_earth[0])**2 + (self.r_sun[1] - self.r_earth[1])**2)
+        self.d2 = math.sqrt((self.r_earth[0]-self.r_sun[0])**2 + (self.r_earth[1] - self.r_sun[1])**2)
+        self.a_sun = (-self.gravitacijska_konstanta*(self.mass_earth/(self.d1)**3))*(np.subtract(self.r_sun, self.r_earth))
+        self.a_earth = (-self.gravitacijska_konstanta*(self.mass_sun/(self.d2)**3))*(np.subtract(self.r_earth, self.r_sun))
         self.v_sun = (np.add(self.v_sun,self.a_sun*self.dt))
         self.v_earth = (np.add(self.v_earth,self.a_earth*self.dt))
         self.r_sun = (np.add(self.r_sun,self.v_sun*self.dt))
@@ -58,6 +60,7 @@ p1 = Gravity()
 p1.set_initial_conditions()
 p1.Evolve()
 
-plt.plot(p1.x_sun_lista, p1.y_sun_lista, p1.x_earth_lista, p1.y_earth_lista)
+plt.plot(p1.x_sun_lista, p1.y_sun_lista, c = "black")
+plt.plot(p1.x_earth_lista, p1.y_earth_lista, c = "green")
 plt.show()
     
