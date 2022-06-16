@@ -1,7 +1,7 @@
 import math 
 import matplotlib.pyplot as plt
 class Particle():
-    def __init__(self,x0,y0,v0,theta):
+    def __init__(self):
         self.x = []
         self.y = []
         self.v_x = []
@@ -9,10 +9,10 @@ class Particle():
         self.t = []
         self.a_x = []
         self.a_y = []
-        self.theta = theta
-        self.dt = 0.1
     
-    def set_initial_conditions(self, x0,y0,v0,theta):
+    def set_initial_conditions(self, x0,y0,v0,theta,dt):
+        self.theta = theta
+        self.dt = dt
         self.a_x.append(0)
         self.a_y.append(9.81)
         self.v_x.append(v0*math.cos(math.radians(theta)))
@@ -29,7 +29,7 @@ class Particle():
         self.t = []
         self.a_x = []
         self.a_y = []
-        self.dt = 0.1
+        self.dt = 0
     
     def __move(self):
         self.t.append(self.t[-1]+self.dt)
@@ -44,20 +44,25 @@ class Particle():
     def range(self):
         while self.y[-1] >= 0:
             self.__move()
-        return self.x[-1]
+        return (self.x[-1])
 
-    def plot_trajectory(self):
-        plt.plot(self.x,self.y)
-        plt.show()
-    
-    def analiticki(self):
+    def analiticki_domet(self):
         self.v_y_broj = self.v_y[0]
         self.v_x_broj = self.v_x[0]
         v0 = math.sqrt((self.v_y_broj)**2+(self.v_x_broj)**2)
         theta = math.radians(self.theta)
         domet = v0**2*math.sin(2*theta)/9.81
-        return domet
+        return (domet)
 
-    def relativna_pogreska(self):
-        pogreska = (abs(self.analiticki() - self.range())/self.analiticki())*100
-        return pogreska
+    def plot_trajectory(self):
+        while self.y[-1] >= 0:
+            self.__move()
+        plt.plot(self.x,self.y)
+        plt.show()
+    
+
+#a = Particle()
+#a.set_initial_conditions(0,0,10,60,0.1)
+#a.range()
+#a.analiticki_domet()
+#a.plot_trajectory()

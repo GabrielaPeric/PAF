@@ -1,29 +1,27 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-x1 = 2.0
-y1 = 3.0
+def crtanje(x1,y1,x2,y2):
+    k = (y2 -y1)/(x2-x1)
+    l = y1 - k*x1
+    
+    x = np.arange(0,10,1)
+    x_lista = x.tolist()
+    y_lista = []
+    
+    for i in x_lista:
+        y_lista.append( k * i + l)
 
-x2 = 6.0
-y2 = 5.0
+    plt.scatter([x1,x2],[y1,y2], color='gray')
 
-a = (y2 - y1) / (x2 - x1)
-b = y1 - a * x1
+    plt.plot(x,y_lista,linestyle='-')
 
-x = np.linspace(0, 8, 100)
-y = a * x + b
+    plt.xlabel('x',fontsize=8)
+    plt.ylabel('y',fontsize=8)
+    
 
-plt.scatter([x1,x2],[y1,y2], color='gray')
+    plt.grid()
 
-plt.plot(x,y,linestyle='-')
-
-plt.xlabel('x',fontsize=8)
-plt.ylabel('y',fontsize=8)
-
-plt.xlim(0,8)
-plt.ylim(0,8)
-
-plt.grid()
-
-plt.savefig("calculate_line_slope_and_intercept.pdf")
-plt.show()
+    plt.show()
+    
+a = crtanje(1,2,3,4)
